@@ -1,0 +1,126 @@
+<html>
+	<head>
+		<title>Binary Watch</title>
+		<style type="text/css">
+			body { background-color:#000; }
+			#clock { background-color:#000; }
+			div.watch { background-color:#f00;height:50px;width:50px; }
+		</style>
+		<script type="text/javascript"><!--
+			var relay=100;
+			var showms=1;
+
+			function setTime()
+			{
+				datum=new Date();
+				h=datum.getHours();
+				m=datum.getMinutes();
+				s=datum.getSeconds();
+				if(showms==1)
+				{
+					ms=datum.getMilliseconds();
+				} else {
+					ms=0;
+				}
+
+				setToTable("h",h);
+				setToTable("m",m);
+				setToTable("s",s);
+				setToTable("ms",ms);
+				setTimeout("setTime();",relay);
+			}
+
+			function setToTable(idpart,zahl)
+			{
+				set(idpart+"512",Math.floor(zahl/512));
+				set(idpart+"256",Math.floor((zahl%512)/256));
+				set(idpart+"128",Math.floor(((zahl%512)%256)/128));
+				set(idpart+"64",Math.floor((((zahl%512)%256)%128)/64));
+				set(idpart+"32",Math.floor(((((zahl%512)%256)%128)%64)/32));
+				set(idpart+"16",Math.floor((((((zahl%512)%256)%128)%64)%32)/16));
+				set(idpart+"8",Math.floor(((((((zahl%512)%256)%128)%64)%32)%16)/8));
+				set(idpart+"4",Math.floor((((((((zahl%512)%256)%128)%64)%32)%16)%8)/4));
+				set(idpart+"2",Math.floor(((((((((zahl%512)%256)%128)%64)%32)%16)%8)%4)/2));
+				set(idpart+"1",Math.floor(((((((((zahl%512)%256)%128)%64)%32)%16)%8)%4)%2));
+			}
+
+			function set(id,on)
+			{
+				if(on==1)
+				{
+					document.getElementById(id).style.backgroundColor="#f00";
+				} else {
+					document.getElementById(id).style.backgroundColor="#000";
+				}
+			}
+
+			function openask()
+			{
+				neu=prompt("Neue Wiederholzeit eingeben:");
+				if(neu==0 && showms==1)
+				{
+					showms=0;
+				} else if(neu==0 && showms==0)
+				{
+					showms=1;
+				} else {
+					relay=neu;
+				}
+			}
+			//--></script>
+	</head>
+	<body onload="setTime();" onkeypress="openask();">
+		<div id="clock">
+			<table border="0">
+				<tr>
+					<td><div class="watch" id="h512"></div></td>
+					<td><div class="watch" id="h256"></div></td>
+					<td><div class="watch" id="h128"></div></td>
+					<td><div class="watch" id="h64"></div></td>
+					<td><div class="watch" id="h32"></div></td>
+					<td><div class="watch" id="h16"></div></td>
+					<td><div class="watch" id="h8"></div></td>
+					<td><div class="watch" id="h4"></div></td>
+					<td><div class="watch" id="h2"></div></td>
+					<td><div class="watch" id="h1"></div></td>
+				</tr>
+				<tr>
+					<td><div class="watch" id="m512"></div></td>
+					<td><div class="watch" id="m256"></div></td>
+					<td><div class="watch" id="m128"></div></td>
+					<td><div class="watch" id="m64"></div></td>
+					<td><div class="watch" id="m32"></div></td>
+					<td><div class="watch" id="m16"></div></td>
+					<td><div class="watch" id="m8"></div></td>
+					<td><div class="watch" id="m4"></div></td>
+					<td><div class="watch" id="m2"></div></td>
+					<td><div class="watch" id="m1"></div></td>
+				</tr>
+				<tr>
+					<td><div class="watch" id="s512"></div></td>
+					<td><div class="watch" id="s256"></div></td>
+					<td><div class="watch" id="s128"></div></td>
+					<td><div class="watch" id="s64"></div></td>
+					<td><div class="watch" id="s32"></div></td>
+					<td><div class="watch" id="s16"></div></td>
+					<td><div class="watch" id="s8"></div></td>
+					<td><div class="watch" id="s4"></div></td>
+					<td><div class="watch" id="s2"></div></td>
+					<td><div class="watch" id="s1"></div></td>
+				</tr>
+				<tr>
+					<td><div class="watch" id="ms512"></div></td>
+					<td><div class="watch" id="ms256"></div></td>
+					<td><div class="watch" id="ms128"></div></td>
+					<td><div class="watch" id="ms64"></div></td>
+					<td><div class="watch" id="ms32"></div></td>
+					<td><div class="watch" id="ms16"></div></td>
+					<td><div class="watch" id="ms8"></div></td>
+					<td><div class="watch" id="ms4"></div></td>
+					<td><div class="watch" id="ms2"></div></td>
+					<td><div class="watch" id="ms1"></div></td>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>
