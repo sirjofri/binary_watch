@@ -16,10 +16,10 @@
 				h=datum.getHours();
 				m=datum.getMinutes();
 				s=datum.getSeconds();
-				if(showms==1)
+				ms=datum.getMilliseconds();
+				if(showms!=1)
 				{
-					ms=datum.getMilliseconds();
-				} else {
+					relay=1000-ms;
 					ms=0;
 				}
 
